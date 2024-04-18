@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../public/quotify.png"
 
+
+
 export default function Home() {
   return (
     <div className='flex flex-col h-[32rem] justify-center items-center mb-0'>
