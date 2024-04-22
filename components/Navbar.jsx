@@ -22,7 +22,7 @@ const Navbar = () => {
   const { signOut } = useClerk();
 
   return (
-    <nav className="navbar flex justify-between items-center mx-8 mt-4  ">
+    <nav className="navbar flex justify-between items-center mx-6 mt-4  ">
       <div className="navcontainer">
         <Link href="/">
           <Image src={Logo} alt="logo" height={50} width={150} />
