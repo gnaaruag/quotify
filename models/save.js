@@ -1,19 +1,7 @@
 import {Schema, model, models} from "mongoose";
 
-const quoteModel = new Schema(
+const saveModel = new Schema(
   {
-	quote: {
-		type: String,
-		required: true,
-	},
-	author: {
-		type: String,
-		required: true,
-	},
-	source: {
-		type: String,
-		default: "",
-	},
 	creator: {
 		type: String,
 		required: true,
@@ -21,12 +9,7 @@ const quoteModel = new Schema(
 	identifier: {
 		type: String,
 		required: true,
-	},
-	likes: {
-		type: [String], 
-		default: [],
-	  },
-  
+	},  
   }
 );
 

@@ -7,7 +7,7 @@ import { FaBookmark } from "react-icons/fa";
 
 import React, { useState } from "react";
 
-const Quotecard = ({ quote, author, source }) => {
+const Quotecard = ({ quote, author, source, identifier }) => {
   const [like, setLike] = useState(false);
   const [bookmark, setBookmark] = useState(false);
 
@@ -22,11 +22,12 @@ const Quotecard = ({ quote, author, source }) => {
     <div className=" border-2 border-gray-200 p-4 rounded-lg ">
       <p className="flex justify-center">
         <span className="text-6xl">{"“"}</span>
-        <span className="text-lg">{quote.trim() + "”"}</span>
+        <span className="text-lg"><p className="break-words">{quote.trim() + "”"}</p></span>
       </p>
       <div className="flex flex-col items-end">
-        <div className="flex flex-col items-start">
-          <p>—{author + ",  " + source}</p>
+        <div className="flex flex-col items-end">
+          <p>—{author}</p>
+          <p>{source}</p>
         </div>
       </div>
       <div className="flex p-4">

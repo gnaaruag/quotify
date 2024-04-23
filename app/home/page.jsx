@@ -63,6 +63,7 @@ export default function Page() {
                   quote={quote.quote}
                   author={quote.author}
                   source={quote.source}
+                  identifier={quote.identifier}
                 />
               </div>
             ))}

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { useUser } from "@clerk/nextjs";
 
@@ -21,7 +21,6 @@ export default function Page() {
 
   const { user } = useUser();
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Here you would submit quoteData to your API
@@ -30,31 +29,28 @@ export default function Page() {
     } else {
       try {
         const uuid = uuidv4();
-        console.log('ppe',uuid)
-        const response = await fetch("/api/new-quote", {
-          method: "POST",
-          body: JSON.stringify({
-            quote: quoteData.quote,
-            author: quoteData.author,
-            source: quoteData.source,
-            creator: user.emailAddresses[0].emailAddress,
-            identifier: uuid,
-            likes: 0
+        console.log("ppe", uuid);
+        toast.promise(
+          fetch("/api/new-quote", {
+            method: "POST",
+            body: JSON.stringify({
+              quote: quoteData.quote,
+              author: quoteData.author,
+              source: quoteData.source,
+              creator: user.emailAddresses[0].emailAddress,
+              identifier: uuid,
+            }),
           }),
-        });
-
-        if (response.ok) {
-          toast.success("Quote Posted Successfully");
-          console.log(response)
-        }
+          {
+            loading: "Posting quote...",
+            success: "Quote Posted Successfully",
+            error: "Failed to post quote"
+          }
+        );
       } catch (err) {
-        console.log(err);
+        console.error("Error posting quote:", err);
       } finally {
-        setQuoteData({
-          quote: "",
-          author: "",
-          source: "",
-        });
+        handleCancel();
       }
     }
   };
@@ -70,7 +66,7 @@ export default function Page() {
   return (
     <div className="flex flex-col justify-content items-center mt-4 mx-auto h-[32rem]">
       <h3 className="text-2xl font-bold">Submit a new Quote</h3>
-      <form onSubmit={handleSubmit} className="w-full max-w-md mt-8">
+      <form className="w-full max-w-md mt-8">
         <div className="mb-4">
           <label
             htmlFor="quote"
@@ -131,7 +127,6 @@ export default function Page() {
             Cancel
           </button>
           <button
-            type="submit"
             onClick={handleSubmit}
             className="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >

@@ -2,7 +2,7 @@ import { connectToDB } from "@/app/utils/connectDB";
 import Quote from "@/models/quote";
 
 export const  POST = async (request, response) => {
-  const {quote, author, source, creator, uuid, likes} = await request.json();
+  const {quote, author, source, creator, identifier} = await request.json();
   try {
     await connectToDB();
     const quoteInstance = new Quote({
@@ -10,8 +10,7 @@ export const  POST = async (request, response) => {
       author: author,
       source: source,
       creator: creator,
-      identifier: uuid,
-      likes: likes,
+      identifier: identifier,
     });
     await quoteInstance.save();
     return new Response(JSON.stringify(quoteInstance), {Status: 201});
